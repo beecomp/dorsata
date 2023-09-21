@@ -17,6 +17,8 @@ defmodule DorsataWeb.Router do
     plug :accepts, ["json"]
   end
 
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:browser, :require_authenticated_user]
+
   scope "/", DorsataWeb do
     pipe_through :browser
 
@@ -101,7 +103,6 @@ defmodule DorsataWeb.Router do
 
       live "/submissions/:id", SubmissionLive.Show, :show
       live "/submissions/:id/show/edit", SubmissionLive.Show, :edit
-
     end
   end
 end

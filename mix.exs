@@ -52,8 +52,8 @@ defmodule Dorsata.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:phoenix_view, "~> 2.0.2"},
-      {:kaffy, "~> 0.9.4"}
-
+      # TODO(jer): update this to non-rc version, CSS is broken on 0.9.4
+      {:kaffy, "~> 0.10.0-rc.2"}
     ]
   end
 

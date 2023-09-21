@@ -21,6 +21,20 @@ config :dorsata, DorsataWeb.Endpoint,
   pubsub_server: Dorsata.PubSub,
   live_view: [signing_salt: "tybvC7y0"]
 
+config :kaffy,
+  # required keys
+  otp_app: :dorsata, # required
+  ecto_repo: Dorsata.Repo, # required
+  router: DorsataWeb.Router # required
+  # optional keys
+  # admin_title: "Kaffy Admin",
+  # admin_logo: "/images/logo.png",
+  # admin_logo_mini: "/images/logo-mini.png",
+  # hide_dashboard: true,
+  # home_page: [schema: [:accounts, :user]],
+  # enable_context_dashboards: true, # since v0.10.0
+  # admin_footer: "Kaffy &copy; 2023" # since v0.10.0
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
