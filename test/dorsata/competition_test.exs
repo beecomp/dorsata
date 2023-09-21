@@ -58,4 +58,66 @@ defmodule Dorsata.CompetitionTest do
       assert %Ecto.Changeset{} = Competition.change_championship(championship)
     end
   end
+
+  describe "rounds" do
+    alias Dorsata.Competition.Round
+
+    import Dorsata.CompetitionFixtures
+
+    @invalid_attrs %{status: nil, title: nil, shortname: nil, problem_url: nil, open_at: nil}
+
+    test "list_rounds/0 returns all rounds" do
+      round = round_fixture()
+      assert Competition.list_rounds() == [round]
+    end
+
+    test "get_round!/1 returns the round with given id" do
+      round = round_fixture()
+      assert Competition.get_round!(round.id) == round
+    end
+
+    test "create_round/1 with valid data creates a round" do
+      valid_attrs = %{status: :unopened, title: "some title", shortname: "some shortname", problem_url: "some problem_url", open_at: ~N[2023-09-20 17:17:00]}
+
+      assert {:ok, %Round{} = round} = Competition.create_round(valid_attrs)
+      assert round.status == :unopened
+      assert round.title == "some title"
+      assert round.shortname == "some shortname"
+      assert round.problem_url == "some problem_url"
+      assert round.open_at == ~N[2023-09-20 17:17:00]
+    end
+
+    test "create_round/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Competition.create_round(@invalid_attrs)
+    end
+
+    test "update_round/2 with valid data updates the round" do
+      round = round_fixture()
+      update_attrs = %{status: :open, title: "some updated title", shortname: "some updated shortname", problem_url: "some updated problem_url", open_at: ~N[2023-09-21 17:17:00]}
+
+      assert {:ok, %Round{} = round} = Competition.update_round(round, update_attrs)
+      assert round.status == :open
+      assert round.title == "some updated title"
+      assert round.shortname == "some updated shortname"
+      assert round.problem_url == "some updated problem_url"
+      assert round.open_at == ~N[2023-09-21 17:17:00]
+    end
+
+    test "update_round/2 with invalid data returns error changeset" do
+      round = round_fixture()
+      assert {:error, %Ecto.Changeset{}} = Competition.update_round(round, @invalid_attrs)
+      assert round == Competition.get_round!(round.id)
+    end
+
+    test "delete_round/1 deletes the round" do
+      round = round_fixture()
+      assert {:ok, %Round{}} = Competition.delete_round(round)
+      assert_raise Ecto.NoResultsError, fn -> Competition.get_round!(round.id) end
+    end
+
+    test "change_round/1 returns a round changeset" do
+      round = round_fixture()
+      assert %Ecto.Changeset{} = Competition.change_round(round)
+    end
+  end
 end
