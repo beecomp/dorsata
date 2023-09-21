@@ -293,4 +293,100 @@ defmodule Dorsata.Competition do
   def change_submission(%Submission{} = submission, attrs \\ %{}) do
     Submission.changeset(submission, attrs)
   end
+
+  alias Dorsata.Competition.UserRound
+
+  @doc """
+  Returns the list of users_rounds.
+
+  ## Examples
+
+      iex> list_users_rounds()
+      [%UserRound{}, ...]
+
+  """
+  def list_users_rounds do
+    Repo.all(UserRound)
+  end
+
+  @doc """
+  Gets a single user_round.
+
+  Raises `Ecto.NoResultsError` if the User round does not exist.
+
+  ## Examples
+
+      iex> get_user_round!(123)
+      %UserRound{}
+
+      iex> get_user_round!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_user_round!(id), do: Repo.get!(UserRound, id)
+
+  @doc """
+  Creates a user_round.
+
+  ## Examples
+
+      iex> create_user_round(%{field: value})
+      {:ok, %UserRound{}}
+
+      iex> create_user_round(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_user_round(attrs \\ %{}) do
+    %UserRound{}
+    |> UserRound.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a user_round.
+
+  ## Examples
+
+      iex> update_user_round(user_round, %{field: new_value})
+      {:ok, %UserRound{}}
+
+      iex> update_user_round(user_round, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_user_round(%UserRound{} = user_round, attrs) do
+    user_round
+    |> UserRound.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a user_round.
+
+  ## Examples
+
+      iex> delete_user_round(user_round)
+      {:ok, %UserRound{}}
+
+      iex> delete_user_round(user_round)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_user_round(%UserRound{} = user_round) do
+    Repo.delete(user_round)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking user_round changes.
+
+  ## Examples
+
+      iex> change_user_round(user_round)
+      %Ecto.Changeset{data: %UserRound{}}
+
+  """
+  def change_user_round(%UserRound{} = user_round, attrs \\ %{}) do
+    UserRound.changeset(user_round, attrs)
+  end
 end

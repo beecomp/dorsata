@@ -1,0 +1,40 @@
+<.header>
+  Listing Users rounds
+  <:actions>
+    <.link patch={~p"/users_rounds/new"}>
+      <.button>New User round</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="users_rounds"
+  rows={@streams.users_rounds}
+  row_click={fn {_id, user_round} -> JS.navigate(~p"/users_rounds/#{user_round}") end}
+>
+  <:action :let={{_id, user_round}}>
+    <div class="sr-only">
+      <.link navigate={~p"/users_rounds/#{user_round}"}>Show</.link>
+    </div>
+    <.link patch={~p"/users_rounds/#{user_round}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, user_round}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: user_round.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="user_round-modal" show on_cancel={JS.patch(~p"/users_rounds")}>
+  <.live_component
+    module={DorsataWeb.UserRoundLive.FormComponent}
+    id={@user_round.id || :new}
+    title={@page_title}
+    action={@live_action}
+    user_round={@user_round}
+    patch={~p"/users_rounds"}
+  />
+</.modal>

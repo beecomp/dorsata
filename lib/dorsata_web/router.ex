@@ -101,6 +101,13 @@ defmodule DorsataWeb.Router do
 
       live("/submissions/:id", SubmissionLive.Show, :show)
       live("/submissions/:id/show/edit", SubmissionLive.Show, :edit)
+
+      live("/users_rounds", UserRoundLive.Index, :index)
+      live("/users_rounds/new", UserRoundLive.Index, :new)
+      live("/users_rounds/:id/edit", UserRoundLive.Index, :edit)
+
+      live("/users_rounds/:id", UserRoundLive.Show, :show)
+      live("/users_rounds/:id/show/edit", UserRoundLive.Show, :edit)
     end
   end
 end

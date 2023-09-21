@@ -176,4 +176,56 @@ defmodule Dorsata.CompetitionTest do
       assert %Ecto.Changeset{} = Competition.change_submission(submission)
     end
   end
+
+  describe "users_rounds" do
+    alias Dorsata.Competition.UserRound
+
+    import Dorsata.CompetitionFixtures
+
+    @invalid_attrs %{}
+
+    test "list_users_rounds/0 returns all users_rounds" do
+      user_round = user_round_fixture()
+      assert Competition.list_users_rounds() == [user_round]
+    end
+
+    test "get_user_round!/1 returns the user_round with given id" do
+      user_round = user_round_fixture()
+      assert Competition.get_user_round!(user_round.id) == user_round
+    end
+
+    test "create_user_round/1 with valid data creates a user_round" do
+      valid_attrs = %{}
+
+      assert {:ok, %UserRound{} = user_round} = Competition.create_user_round(valid_attrs)
+    end
+
+    test "create_user_round/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Competition.create_user_round(@invalid_attrs)
+    end
+
+    test "update_user_round/2 with valid data updates the user_round" do
+      user_round = user_round_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %UserRound{} = user_round} = Competition.update_user_round(user_round, update_attrs)
+    end
+
+    test "update_user_round/2 with invalid data returns error changeset" do
+      user_round = user_round_fixture()
+      assert {:error, %Ecto.Changeset{}} = Competition.update_user_round(user_round, @invalid_attrs)
+      assert user_round == Competition.get_user_round!(user_round.id)
+    end
+
+    test "delete_user_round/1 deletes the user_round" do
+      user_round = user_round_fixture()
+      assert {:ok, %UserRound{}} = Competition.delete_user_round(user_round)
+      assert_raise Ecto.NoResultsError, fn -> Competition.get_user_round!(user_round.id) end
+    end
+
+    test "change_user_round/1 returns a user_round changeset" do
+      user_round = user_round_fixture()
+      assert %Ecto.Changeset{} = Competition.change_user_round(user_round)
+    end
+  end
 end

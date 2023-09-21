@@ -61,4 +61,18 @@ defmodule Dorsata.CompetitionFixtures do
 
     submission
   end
+
+  @doc """
+  Generate a user_round.
+  """
+  def user_round_fixture(attrs \\ %{}) do
+    {:ok, user_round} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> Dorsata.Competition.create_user_round()
+
+    user_round
+  end
 end
