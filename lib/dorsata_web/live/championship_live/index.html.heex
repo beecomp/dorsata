@@ -1,0 +1,42 @@
+<.header>
+  Listing Championships
+  <:actions>
+    <.link patch={~p"/championships/new"}>
+      <.button>New Championship</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="championships"
+  rows={@streams.championships}
+  row_click={fn {_id, championship} -> JS.navigate(~p"/championships/#{championship}") end}
+>
+  <:col :let={{_id, championship}} label="Title"><%= championship.title %></:col>
+  <:col :let={{_id, championship}} label="Shortname"><%= championship.shortname %></:col>
+  <:action :let={{_id, championship}}>
+    <div class="sr-only">
+      <.link navigate={~p"/championships/#{championship}"}>Show</.link>
+    </div>
+    <.link patch={~p"/championships/#{championship}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, championship}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: championship.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="championship-modal" show on_cancel={JS.patch(~p"/championships")}>
+  <.live_component
+    module={DorsataWeb.ChampionshipLive.FormComponent}
+    id={@championship.id || :new}
+    title={@page_title}
+    action={@live_action}
+    championship={@championship}
+    patch={~p"/championships"}
+  />
+</.modal>

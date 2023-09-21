@@ -1,0 +1,27 @@
+<.header>
+  Championship <%= @championship.id %>
+  <:subtitle>This is a championship record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/championships/#{@championship}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit championship</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @championship.title %></:item>
+  <:item title="Shortname"><%= @championship.shortname %></:item>
+</.list>
+
+<.back navigate={~p"/championships"}>Back to championships</.back>
+
+<.modal :if={@live_action == :edit} id="championship-modal" show on_cancel={JS.patch(~p"/championships/#{@championship}")}>
+  <.live_component
+    module={DorsataWeb.ChampionshipLive.FormComponent}
+    id={@championship.id}
+    title={@page_title}
+    action={@live_action}
+    championship={@championship}
+    patch={~p"/championships/#{@championship}"}
+  />
+</.modal>
