@@ -46,4 +46,19 @@ defmodule Dorsata.CompetitionFixtures do
 
     round
   end
+
+  @doc """
+  Generate a submission.
+  """
+  def submission_fixture(attrs \\ %{}) do
+    {:ok, submission} =
+      attrs
+      |> Enum.into(%{
+        status: :unlocked,
+        files: ["option1", "option2"]
+      })
+      |> Dorsata.Competition.create_submission()
+
+    submission
+  end
 end

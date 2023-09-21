@@ -120,4 +120,60 @@ defmodule Dorsata.CompetitionTest do
       assert %Ecto.Changeset{} = Competition.change_round(round)
     end
   end
+
+  describe "submissions" do
+    alias Dorsata.Competition.Submission
+
+    import Dorsata.CompetitionFixtures
+
+    @invalid_attrs %{status: nil, files: nil}
+
+    test "list_submissions/0 returns all submissions" do
+      submission = submission_fixture()
+      assert Competition.list_submissions() == [submission]
+    end
+
+    test "get_submission!/1 returns the submission with given id" do
+      submission = submission_fixture()
+      assert Competition.get_submission!(submission.id) == submission
+    end
+
+    test "create_submission/1 with valid data creates a submission" do
+      valid_attrs = %{status: :unlocked, files: ["option1", "option2"]}
+
+      assert {:ok, %Submission{} = submission} = Competition.create_submission(valid_attrs)
+      assert submission.status == :unlocked
+      assert submission.files == ["option1", "option2"]
+    end
+
+    test "create_submission/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Competition.create_submission(@invalid_attrs)
+    end
+
+    test "update_submission/2 with valid data updates the submission" do
+      submission = submission_fixture()
+      update_attrs = %{status: :locked, files: ["option1"]}
+
+      assert {:ok, %Submission{} = submission} = Competition.update_submission(submission, update_attrs)
+      assert submission.status == :locked
+      assert submission.files == ["option1"]
+    end
+
+    test "update_submission/2 with invalid data returns error changeset" do
+      submission = submission_fixture()
+      assert {:error, %Ecto.Changeset{}} = Competition.update_submission(submission, @invalid_attrs)
+      assert submission == Competition.get_submission!(submission.id)
+    end
+
+    test "delete_submission/1 deletes the submission" do
+      submission = submission_fixture()
+      assert {:ok, %Submission{}} = Competition.delete_submission(submission)
+      assert_raise Ecto.NoResultsError, fn -> Competition.get_submission!(submission.id) end
+    end
+
+    test "change_submission/1 returns a submission changeset" do
+      submission = submission_fixture()
+      assert %Ecto.Changeset{} = Competition.change_submission(submission)
+    end
+  end
 end
