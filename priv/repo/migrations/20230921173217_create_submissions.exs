@@ -12,7 +12,7 @@ defmodule Dorsata.Repo.Migrations.CreateSubmissions do
       timestamps()
     end
 
-    create index(:submissions, [:user_id, :round_id])
+    create unique_index(:submissions, [:user_id, :round_id])
     create index(:submissions, [:user_id])
     create index(:submissions, [:round_id])
   end

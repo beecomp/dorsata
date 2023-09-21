@@ -50,7 +50,10 @@ defmodule Dorsata.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:phoenix_view, "~> 2.0.2"},
+      {:kaffy, "~> 0.9.4"}
+
     ]
   end
 

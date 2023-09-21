@@ -10,6 +10,7 @@ defmodule Dorsata.Repo.Migrations.CreateUsersRounds do
       timestamps()
     end
 
+    create unique_index(:users_rounds, [:user_id, :round_id])
     create index(:users_rounds, [:user_id])
     create index(:users_rounds, [:round_id])
   end
