@@ -14,7 +14,8 @@ defmodule Dorsata.Repo.Migrations.CreateRounds do
       timestamps()
     end
 
-    create unique_index(:rounds, [:shortname])
+    create unique_index(:rounds, [:shortname, :championship_id])
+    create index(:rounds, [:shortname])
     create index(:rounds, [:championship_id])
   end
 end
