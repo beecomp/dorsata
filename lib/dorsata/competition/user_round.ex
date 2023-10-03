@@ -5,7 +5,6 @@ defmodule Dorsata.Competition.UserRound do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users_rounds" do
-
     field :user_id, :binary_id
     field :round_id, :binary_id
 

@@ -36,14 +36,19 @@ defmodule Dorsata.CompetitionTest do
       championship = championship_fixture()
       update_attrs = %{title: "some updated title", shortname: "some updated shortname"}
 
-      assert {:ok, %Championship{} = championship} = Competition.update_championship(championship, update_attrs)
+      assert {:ok, %Championship{} = championship} =
+               Competition.update_championship(championship, update_attrs)
+
       assert championship.title == "some updated title"
       assert championship.shortname == "some updated shortname"
     end
 
     test "update_championship/2 with invalid data returns error changeset" do
       championship = championship_fixture()
-      assert {:error, %Ecto.Changeset{}} = Competition.update_championship(championship, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Competition.update_championship(championship, @invalid_attrs)
+
       assert championship == Competition.get_championship!(championship.id)
     end
 
@@ -77,7 +82,13 @@ defmodule Dorsata.CompetitionTest do
     end
 
     test "create_round/1 with valid data creates a round" do
-      valid_attrs = %{status: :unopened, title: "some title", shortname: "some shortname", problem_url: "some problem_url", open_at: ~N[2023-09-20 17:17:00]}
+      valid_attrs = %{
+        status: :unopened,
+        title: "some title",
+        shortname: "some shortname",
+        problem_url: "some problem_url",
+        open_at: ~N[2023-09-20 17:17:00]
+      }
 
       assert {:ok, %Round{} = round} = Competition.create_round(valid_attrs)
       assert round.status == :unopened
@@ -93,7 +104,14 @@ defmodule Dorsata.CompetitionTest do
 
     test "update_round/2 with valid data updates the round" do
       round = round_fixture()
-      update_attrs = %{status: :open, title: "some updated title", shortname: "some updated shortname", problem_url: "some updated problem_url", open_at: ~N[2023-09-21 17:17:00]}
+
+      update_attrs = %{
+        status: :open,
+        title: "some updated title",
+        shortname: "some updated shortname",
+        problem_url: "some updated problem_url",
+        open_at: ~N[2023-09-21 17:17:00]
+      }
 
       assert {:ok, %Round{} = round} = Competition.update_round(round, update_attrs)
       assert round.status == :open
@@ -154,14 +172,19 @@ defmodule Dorsata.CompetitionTest do
       submission = submission_fixture()
       update_attrs = %{status: :locked, files: ["option1"]}
 
-      assert {:ok, %Submission{} = submission} = Competition.update_submission(submission, update_attrs)
+      assert {:ok, %Submission{} = submission} =
+               Competition.update_submission(submission, update_attrs)
+
       assert submission.status == :locked
       assert submission.files == ["option1"]
     end
 
     test "update_submission/2 with invalid data returns error changeset" do
       submission = submission_fixture()
-      assert {:error, %Ecto.Changeset{}} = Competition.update_submission(submission, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Competition.update_submission(submission, @invalid_attrs)
+
       assert submission == Competition.get_submission!(submission.id)
     end
 
@@ -208,12 +231,16 @@ defmodule Dorsata.CompetitionTest do
       user_round = user_round_fixture()
       update_attrs = %{}
 
-      assert {:ok, %UserRound{} = user_round} = Competition.update_user_round(user_round, update_attrs)
+      assert {:ok, %UserRound{} = user_round} =
+               Competition.update_user_round(user_round, update_attrs)
     end
 
     test "update_user_round/2 with invalid data returns error changeset" do
       user_round = user_round_fixture()
-      assert {:error, %Ecto.Changeset{}} = Competition.update_user_round(user_round, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Competition.update_user_round(user_round, @invalid_attrs)
+
       assert user_round == Competition.get_user_round!(user_round.id)
     end
 

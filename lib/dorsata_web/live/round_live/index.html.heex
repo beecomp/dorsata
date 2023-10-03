@@ -33,7 +33,12 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="round-modal" show on_cancel={JS.patch(~p"/rounds")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="round-modal"
+  show
+  on_cancel={JS.patch(~p"/rounds")}
+>
   <.live_component
     module={DorsataWeb.RoundLive.FormComponent}
     id={@round.id || :new}

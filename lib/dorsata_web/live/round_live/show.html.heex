@@ -18,7 +18,12 @@
 
 <.back navigate={~p"/rounds"}>Back to rounds</.back>
 
-<.modal :if={@live_action == :edit} id="round-modal" show on_cancel={JS.patch(~p"/rounds/#{@round}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="round-modal"
+  show
+  on_cancel={JS.patch(~p"/rounds/#{@round}")}
+>
   <.live_component
     module={DorsataWeb.RoundLive.FormComponent}
     id={@round.id}

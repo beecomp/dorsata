@@ -49,7 +49,9 @@ defmodule DorsataWeb.ChampionshipLiveTest do
     test "updates championship in listing", %{conn: conn, championship: championship} do
       {:ok, index_live, _html} = live(conn, ~p"/championships")
 
-      assert index_live |> element("#championships-#{championship.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#championships-#{championship.id} a", "Edit")
+             |> render_click() =~
                "Edit Championship"
 
       assert_patch(index_live, ~p"/championships/#{championship}/edit")
@@ -72,7 +74,10 @@ defmodule DorsataWeb.ChampionshipLiveTest do
     test "deletes championship in listing", %{conn: conn, championship: championship} do
       {:ok, index_live, _html} = live(conn, ~p"/championships")
 
-      assert index_live |> element("#championships-#{championship.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#championships-#{championship.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#championships-#{championship.id}")
     end
   end

@@ -68,9 +68,7 @@ defmodule Dorsata.CompetitionFixtures do
   def user_round_fixture(attrs \\ %{}) do
     {:ok, user_round} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Dorsata.Competition.create_user_round()
 
     user_round

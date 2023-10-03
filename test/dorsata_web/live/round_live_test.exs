@@ -4,8 +4,20 @@ defmodule DorsataWeb.RoundLiveTest do
   import Phoenix.LiveViewTest
   import Dorsata.CompetitionFixtures
 
-  @create_attrs %{status: :unopened, title: "some title", shortname: "some shortname", problem_url: "some problem_url", open_at: "2023-09-20T17:17:00"}
-  @update_attrs %{status: :open, title: "some updated title", shortname: "some updated shortname", problem_url: "some updated problem_url", open_at: "2023-09-21T17:17:00"}
+  @create_attrs %{
+    status: :unopened,
+    title: "some title",
+    shortname: "some shortname",
+    problem_url: "some problem_url",
+    open_at: "2023-09-20T17:17:00"
+  }
+  @update_attrs %{
+    status: :open,
+    title: "some updated title",
+    shortname: "some updated shortname",
+    problem_url: "some updated problem_url",
+    open_at: "2023-09-21T17:17:00"
+  }
   @invalid_attrs %{status: nil, title: nil, shortname: nil, problem_url: nil, open_at: nil}
 
   defp create_round(_) do

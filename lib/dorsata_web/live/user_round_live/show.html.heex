@@ -8,12 +8,16 @@
   </:actions>
 </.header>
 
-<.list>
-</.list>
+<.list></.list>
 
 <.back navigate={~p"/users_rounds"}>Back to users_rounds</.back>
 
-<.modal :if={@live_action == :edit} id="user_round-modal" show on_cancel={JS.patch(~p"/users_rounds/#{@user_round}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="user_round-modal"
+  show
+  on_cancel={JS.patch(~p"/users_rounds/#{@user_round}")}
+>
   <.live_component
     module={DorsataWeb.UserRoundLive.FormComponent}
     id={@user_round.id}

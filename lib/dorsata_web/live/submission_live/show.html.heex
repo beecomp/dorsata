@@ -15,7 +15,12 @@
 
 <.back navigate={~p"/submissions"}>Back to submissions</.back>
 
-<.modal :if={@live_action == :edit} id="submission-modal" show on_cancel={JS.patch(~p"/submissions/#{@submission}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="submission-modal"
+  show
+  on_cancel={JS.patch(~p"/submissions/#{@submission}")}
+>
   <.live_component
     module={DorsataWeb.SubmissionLive.FormComponent}
     id={@submission.id}

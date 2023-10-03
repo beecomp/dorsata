@@ -4,7 +4,9 @@
 const plugin = require("tailwindcss/plugin")
 const fs = require("fs")
 const path = require("path")
+const defaultTheme = require("tailwindcss/defaultTheme");
 
+const sansFonts = defaultTheme.fontFamily.sans;
 module.exports = {
   content: [
     "./js/**/*.js",
@@ -13,6 +15,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Barlow", ...sansFonts],
+        semi: ["Barlow Semi Condensed", sansFonts],
+        // alfa: ["Alfa Slab One", "cursive"],
+      },
       colors: {
         brand: "#FD4F00",
       }
@@ -20,6 +27,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms"),
+    require('@tailwindcss/line-clamp'),
     // Allows prefixing tailwind classes with LiveView classes to add rules
     // only when LiveView classes are applied, for example:
     //

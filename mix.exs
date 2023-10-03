@@ -53,7 +53,8 @@ defmodule Dorsata.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:phoenix_view, "~> 2.0.2"},
       # TODO(jer): update this to non-rc version, CSS is broken on 0.9.4
-      {:kaffy, "~> 0.10.0-rc.2"}
+      {:kaffy, "~> 0.10.0-rc.2"},
+      {:tailwind_formatter, "~> 0.3.7", only: [:dev, :test], runtime: false}
     ]
   end
 
